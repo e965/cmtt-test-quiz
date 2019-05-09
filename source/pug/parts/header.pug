@@ -1,0 +1,25 @@
+header.header
+
+	div.header__brand
+		a(href='https://vc.ru' rel='home')
+			img(src=`${PATHS.img}/vc-header/vc-logo.svg?v=${_V}` alt=`vc.ru header logo`)
+
+	nav.header__menu
+		ul
+			li #[a(href='https://vc.ru' rel='home') Популярное]
+			li
+				a(href='https://vc.ru/new') Свежее #[span.fresh-badge 42]
+			li #[a(href='https://vc.ru/job' rel='home') Вакансии]
+
+	div.header__search
+		button(data-action='search')
+			img(src=`${PATHS.img}/vc-header/vc-search-icon.svg?v=${_V}`)
+			span поиск
+
+	div.header__write-btn
+		a(href='https://vc.ru/writing') Написать
+
+	div.header__auth
+		a(href='https://vc.ru/writing')
+			img(src=`${PATHS.img}/vc-header/vc-auth-icon.svg?v=${_V}`)
+			span Войти

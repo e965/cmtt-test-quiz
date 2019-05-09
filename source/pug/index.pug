@@ -1,0 +1,44 @@
+doctype html
+html(lang='ru')
+	head
+
+		title Тестовый тест для Комитета (кста)
+		meta(charset='utf-8')
+
+		link(rel="shortcut icon" href=`${PATHS.img}/vc-favicon.ico?v=${_V}`)
+
+		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic')
+
+		each CSS in ['power', 'header']
+			link(rel='stylesheet' href=`${PATHS.css}/${CSS}.min.css?v=${_V}`)
+
+	body(data-test-q-num='0' data-test-score='0')
+
+		div.content
+
+			include parts/header.pug
+
+			main.main
+
+				data.screen.no-js(data-current)
+					p У вас не включен JavaScript в браузере :(
+
+					p Включите его для прохождения теста, пожалуйсто!!!1
+
+				div.screen.screen-start
+					p Это тест для Комитета. Пока что он не оформлен, но скоро здесь будет классно.
+					p Нажмите кнопку ниже, чтобы начать флексить.
+
+					p #[button(data-action='start-test') Начать тест]
+
+				div.screen.screen-test
+					p Тут пока ничего нет.............................
+
+				div.screen.screen-end
+
+		include inc/question-template.pug
+
+		each JS in ['vendors/kamina.min', 'vendors/likely']
+			script(src=`${PATHS.js}/${JS}.js?v=${_V}` defer)
+
+		script(src=`${PATHS.js}/engine.min.js?v=${_V}` type='module' defer)
