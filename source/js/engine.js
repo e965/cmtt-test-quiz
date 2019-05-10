@@ -9,20 +9,18 @@ import { QUESTIONS } from './modules/questions.min.js'
 let prepareQuestions = Q => {
 	let questions = Q
 
-	let a_e_t = 'answers_explanation_text'
+	let e_c_t = 'expl_common_text'
 
 	questions.forEach(question => {
 		question.answers.forEach(answer => {
-			if (a_e_t in question) {
-				answer.explanation += ' ' + question[a_e_t]
+			if (e_c_t in question) {
+				answer.explanation += ' ' + question[e_c_t]
 			}
 
-			answer.explanation = U.linkifyText(answer.explanation)
+			answer.explanation = U.prepareText(answer.explanation)
 		})
 
-		if (a_e_t in question) {
-			delete question.answers_explanation_text
-		}
+		if (e_c_t in question) { delete question[e_c_t] }
 	})
 
 	return questions
@@ -31,13 +29,21 @@ let prepareQuestions = Q => {
 let showScreen = screen => {
 	let dataItemName = 'current'
 
-	delete U.qs(`.screen[data-${dataItemName}]`).dataset[dataItemName]
+	delete $make.qs(`.screen[data-${dataItemName}]`).dataset[dataItemName]
 
-	U.qs(`.screen-${screen}`).dataset[dataItemName] = ''
+	$make.qs(`.screen-${screen}`).dataset[dataItemName] = ''
+}
+
+let vcSearch = () => {
+	let _data = prompt('Что хотите найти?', 'Rambler Group купили издательство «Комитет»')
+
+	if (_data) {
+		window.open(`https://vc.ru/search/${encodeURIComponent(_data)}`)
+	}
 }
 
 let updateButtonsActions = () => {
-	let buttonsWithActions = U.qs('button[data-action', ['a'])
+	let buttonsWithActions = $make.qs('button[data-action]', ['a'])
 
 	buttonsWithActions.forEach(button => {
 		button.addEventListener('click', e => {
@@ -46,6 +52,8 @@ let updateButtonsActions = () => {
 			switch (_action) {
 				case 'start-test':
 					showScreen('test'); break
+				case 'vc-search':
+					vcSearch(); break
 				default:
 					alert('На кнопку не назначено действие!')
 			}

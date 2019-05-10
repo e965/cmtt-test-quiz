@@ -2,6 +2,19 @@
 	display flex
 	align-items center
 
+	text-align center
+	font-size .9em
+
+	a {
+		&, &:visited, /button {
+			color #000
+		}
+
+		&:hover, /button:hover {
+			color #e25a76
+		}
+	}
+
 	&__brand {
 		a { display: block }
 
@@ -12,19 +25,61 @@
 
 	&__menu {
 		ul {
-			& > li { display: inline-block }
+			& > li {
+				display: inline-block
+
+				& > * {
+					vertical-align middle
+				}
+
+				&:not(:first-of-type) {
+					margin-left 15px
+				}
+			}
+		}
+
+		.fresh-badge {
+				background-color: #e25a76;
+
+				font-size: .8em;
+				color: #fff;
+
+				border-radius: 2px;
+				padding: 0 4px;
+
+		}
+	}
+
+	&__search button, &__auth a {
+		display block
+
+		width 70px
+
+		& > * {
+			display inline
+			vertical-align middle
+
+			pointer-events none
+		}
+
+		img {
+			height 20px
+			margin-right 3px
 		}
 	}
 
 	&__search {
+		button {
+			background-color transparent
+			border 0
+		}
+	}
+
+	&__auth {
 
 	}
 
 	&__write-btn {
-
-	}
-
-	&__auth {
 
 	}
 }

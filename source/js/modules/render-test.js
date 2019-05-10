@@ -13,21 +13,19 @@ export class RenderTest {
 	}
 
 	showQuestion() {
-		let questionTemplate = U.qs('#question')
+		let questionTemplate = $make.qs('#question')
 
 		let currQ = this.getCurrentQuestion()
 
 		let _content = questionTemplate.content
 
-		U.qsf('.question__title', _content).textContent = currQ.title
+		$make.qsf('.question__title', _content).textContent = currQ.title
 
 		currQ.answers.forEach(answer => {
-			let listItem = U.createElem('li')
+			let listItem = $create.elem('li')
 
-			U.qsf('.question__answers', _content).appendChild(listItem)
+			$make.qsf('.question__answers', _content).appendChild(listItem)
 		})
-
-		console.log(_content)
 
 	}
 
