@@ -1,9 +1,17 @@
 .header {
 	display flex
 	align-items center
+	justify-content space-between
 
 	text-align center
 	font-size .9em
+
+	padding 0 10px
+
+	& > * {
+		flex none
+		flex=basis content
+	}
 
 	a {
 		&, &:visited, /button {
@@ -11,7 +19,7 @@
 		}
 
 		&:hover, /button:hover {
-			color #e25a76
+			color var(--links-hover-color)
 		}
 	}
 
@@ -53,10 +61,8 @@
 	&__search button, &__auth a {
 		display block
 
-		width 70px
-
 		& > * {
-			display inline
+			display inline-block
 			vertical-align middle
 
 			pointer-events none
@@ -64,7 +70,10 @@
 
 		img {
 			height 20px
-			margin-right 3px
+		}
+
+		span {
+			margin-left 5px
 		}
 	}
 
@@ -80,6 +89,35 @@
 	}
 
 	&__write-btn {
+		a {
+			border 1px solid #ccc
+			border-radius 4px
 
+			padding 5px 10px
+
+			background-color #fff
+
+			&:hover {
+				color #fff
+				background-color var(--links-hover-color)
+			}
+		}
+	}
+}
+
+@media screen and (max-width 679px) {
+	.header {
+		&__menu {
+			ul {
+				li:first-child {
+					display none
+				}
+			}
+		}
+		&__search, &__auth {
+			span {
+				display none
+			}
+		}
 	}
 }
