@@ -2,49 +2,35 @@ doctype html
 html(lang='ru')
 	head
 
-		title Тестовый тест для Комитета (кста)
+		include inc/vars.pug
+
+		title #{TITLE}
 		meta(charset='utf-8')
+
+		meta(name='description' content=`${DESCRIPTION}`)
+
+		each og in [{ what: 'locale', content: 'ru_RU' }, { what: 'type', content: 'website' }, { what: 'image', content: `${PATHS.img}/share.png?v=${_V}` }]
+			meta(property=`og:${og.what}` content=`${og.content}`)
+
+		each og in [{ what: 'card', content: 'summary_large_image' }, { what: 'title', content: `${TITLE}` }, { what: 'description', content: `${DESCRIPTION}` }, { what: 'image', content: `${PATHS.img}/share.png?v=${VERSION}` }]
+			meta(name=`twitter:${og.what}` content=`${og.content}`)
 
 		link(rel="shortcut icon" href=`${PATHS.img}/vc-favicon.ico?v=${_V}`)
 
 		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic')
 
-		each CSS in ['power', 'header', 'test']
+		each CSS in ['power', 'header']
 			link(rel='stylesheet' href=`${PATHS.css}/${CSS}.min.css?v=${_V}`)
 
-	body(data-test-q-num='0' data-test-score='0')
+	body
 
-		div.content
+		div.content.content__index
 
 			include parts/header.pug
 
 			main.main
 
-				data.screen.no-js(data-current)
-					p У вас не включен JavaScript в браузере :(
+				iframe(src='./test-frame.html')
 
-					p Включите его для прохождения теста, пожалуйсто!!!1
-
-				div.screen.screen-start
-					div.text-block
-						div.badge Тест
-
-						h2.title Как хорошо вы разбираетесь в новостях бизнеса
-
-						p.text По следам публикаций на vc.ru.
-
-						p.button #[button(data-action='start-test') Начать]
-
-					div.background
-
-				div.screen.screen-test
-					p Тут пока ничего нет.............................
-
-				div.screen.screen-end
-
-		include inc/question-template.pug
-
-		each JS in ['vendors/kamina.min', 'vendors/likely']
+		each JS in ['vendors/kamina.min', 'index.min']
 			script(src=`${PATHS.js}/${JS}.js?v=${_V}` defer)
-
-		script(src=`${PATHS.js}/engine.min.js?v=${_V}` type='module' defer)

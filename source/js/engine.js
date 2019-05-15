@@ -34,14 +34,6 @@ let showScreen = screen => {
 	$make.qs(`.screen-${screen}`).dataset[dataItemName] = ''
 }
 
-let vcSearch = () => {
-	let _data = prompt('Что хотите найти?', 'Rambler Group купили издательство «Комитет»')
-
-	if (_data) {
-		window.open(`https://vc.ru/search/${encodeURIComponent(_data)}`)
-	}
-}
-
 let updateButtonsActions = () => {
 	let buttonsWithActions = $make.qs('button[data-action]', ['a'])
 
@@ -52,8 +44,6 @@ let updateButtonsActions = () => {
 			switch (_action) {
 				case 'start-test':
 					showScreen('test'); break
-				case 'vc-search':
-					vcSearch(); break
 				default:
 					alert('На кнопку не назначено действие!')
 			}

@@ -1,0 +1,52 @@
+doctype html
+html(lang='ru')
+	head
+
+		include inc/vars.pug
+
+		title #{TITLE}
+		meta(charset='utf-8')
+
+		meta(name='robots' content='noindex, nofollow')
+
+		link(rel="shortcut icon" href=`${PATHS.img}/vc-favicon.ico?v=${_V}`)
+
+		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic')
+
+		each CSS in ['power', 'test']
+			link(rel='stylesheet' href=`${PATHS.css}/${CSS}.min.css?v=${_V}`)
+
+	body(data-test-q-num='0' data-test-score='0')
+
+		div.content.content__test
+
+			main.main
+
+				data.screen.no-js(data-current)
+					p У вас не включен JavaScript в браузере :(
+
+					p Включите его для прохождения теста, пожалуйсто!!!1
+
+				div.screen.screen-start
+					div.text-block
+						div.badge Тест
+
+						h2.title #{TITLE}
+
+						p.text #{DESCRIPTION}
+
+						p.button #[button(data-action='start-test') Начать]
+
+					div.background
+
+				div.screen.screen-test
+					p Тут пока ничего нет.............................
+
+				div.screen.screen-end
+
+		include inc/question-template.pug
+
+		each JS in ['vendors/kamina.min', 'vendors/likely']
+			script(src=`${PATHS.js}/${JS}.js?v=${_V}` defer)
+
+		script(src=`${PATHS.js}/engine.min.js?v=${_V}` type='module' defer)

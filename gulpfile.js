@@ -93,9 +93,9 @@ let pugTubes = [
 		_V:     project.version,
 
 		PATHS: {
-			js:  `/${dirs.assets}/js`,
-			css: `/${dirs.assets}/css`,
-			img: `/${dirs.assets}/img`,
+			js:  `./${dirs.assets}/js`,
+			css: `./${dirs.assets}/css`,
+			img: `./${dirs.assets}/img`,
 		},
 	}}),
 	bom(),
@@ -145,7 +145,7 @@ let stylusTube = [
 	stylus.compile({
 		compress: true,
 		rawDefine: {
-			'$imgPath': `/${dirs.assets}/img`,
+			'$imgPath': `../img`,
 			'$_V': project.version
 		},
 	}),

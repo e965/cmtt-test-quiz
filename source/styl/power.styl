@@ -5,6 +5,9 @@
 
 :root {
 	--links-hover-color: #e25a76;
+
+	--test-width: 1000px;
+	--test-height: 530px;
 }
 
 html, body, .content {
@@ -13,8 +16,6 @@ html, body, .content {
 
 body {
 	background-color #feebef
-
-	overflow-y scroll
 
 	font-family Roboto, Helvetica, Tahoma, Arial, sans-serif
 	font-size 16px
@@ -42,28 +43,40 @@ a {
 }
 
 .content {
-	display grid
+	&__index {
+		display grid
 
-	grid-auto-columns 1fr
-	grid-auto-rows 50px 1fr
+		grid-template-columns 1fr
+		grid-template-rows 50px 1fr
+
+		iframe {
+			width calc(var(--test-width) + 20px)
+			height calc(var(--test-height) + 20px)
+			border 0
+		}
+
+		.main {
+			padding: 20px
+		}
+	}
 }
 
 .main {
 	display flex
 	justify-content center
 	align-items center
-
-	padding 20px
 }
 
 .screen {
-	width 1000px; height 530px
+	width var(--test-width); height var(--test-height)
 
 	background-image url($imgPath/test-background.png?v=$_V)
 	background-repeat no-repeat
 	background-size cover
 
 	position relative
+
+	margin 10px
 
 	&:not([data-current]) {
 		display none
