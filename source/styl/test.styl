@@ -1,0 +1,80 @@
+.screen {
+	&-start {
+		.background {
+			background-image url($imgPath/screen_start/tinkoff.png?v=$_V), url($imgPath/screen_start/money.png?v=$_V), url($imgPath/screen_start/paper.png?v=$_V)
+
+			background-repeat no-repeat
+
+			background-size 90px, 200px, 400px
+
+			background-position top 50px right 250px, bottom 70px right 450px, right bottom
+		}
+
+		.text-block {
+			width fit-content
+			max-width 500px
+
+			position relative
+
+			margin-top 100px
+			margin-bottom 50px
+			margin-left 100px
+
+			z-index 1
+		}
+
+		.badge {
+			width fit-content
+			padding 5px 10px
+
+			position absolute
+			top -35px; right 0
+
+			background-color #e25a76
+
+			color #fff
+
+			cursor default
+
+			&:after {
+				content: ''
+
+				position absolute
+				bottom -15px; right 0
+
+				width 0; height 0
+
+				border-top 15px solid #ba4961
+				border-right 15px solid transparent
+			}
+		}
+
+		.title {
+			font-size: 2em
+		}
+
+		.text {
+			margin-top: 20px
+		}
+
+		.button {
+			margin-top 210px
+
+			button {
+				background-color #fff
+				border 0
+
+				box-shadow 0px 15px 22px rgba(#000, .2)
+
+				padding 10px 40px
+
+				font-weight 500
+				font-size 1.3em
+
+				&:hover {
+					opacity .8
+				}
+			}
+		}
+	}
+}

@@ -24,10 +24,10 @@ let
 
 /*  Подключение сторонних модулей к проекту */
 
-let liveServer =	require('browser-sync')
+let liveServer = require('browser-sync')
 
 let stylus = {
-	compile:  require('gulp-stylus')
+	compile: require('gulp-stylus')
 }
 
 let uglify = {
@@ -42,11 +42,11 @@ let reloadServer = () => liveServer.stream()
 let getPackageDir = packageName => path.dirname(require.resolve(`${packageName}/package.json`))
 
 let dirs = {
-	dev: 'source',
-	build: 'build',
-	dist: 'dist',
-	dist_static: 'dist_static',
-	assets: 'assets'
+	dev:			'source',
+	build:			'build',
+	dist:			'dist',
+	dist_static:	'dist_static',
+	assets:			'assets'
 }
 
 let paths = {
@@ -93,9 +93,9 @@ let pugTubes = [
 		_V:     project.version,
 
 		PATHS: {
-			js:       `/${dirs.assets}/js`,
-			css:      `/${dirs.assets}/css`,
-			img:      `/${dirs.assets}/img`,
+			js:  `/${dirs.assets}/js`,
+			css: `/${dirs.assets}/css`,
+			img: `/${dirs.assets}/img`,
 		},
 	}}),
 	bom(),
@@ -142,7 +142,13 @@ gulp.task('js:get-vendors', () => tube([
 
 let stylusTube = [
 	plumber(),
-	stylus.compile(),
+	stylus.compile({
+		compress: true,
+		rawDefine: {
+			'$imgPath': `/${dirs.assets}/img`,
+			'$_V': project.version
+		},
+	}),
 	bom(),
 	rename({ suffix: '.min' }),
 	cleanCSS(),

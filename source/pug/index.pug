@@ -9,7 +9,7 @@ html(lang='ru')
 
 		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic')
 
-		each CSS in ['power', 'header']
+		each CSS in ['power', 'header', 'test']
 			link(rel='stylesheet' href=`${PATHS.css}/${CSS}.min.css?v=${_V}`)
 
 	body(data-test-q-num='0' data-test-score='0')
@@ -26,10 +26,16 @@ html(lang='ru')
 					p Включите его для прохождения теста, пожалуйсто!!!1
 
 				div.screen.screen-start
-					p Это тест для Комитета. Пока что он не оформлен, но скоро здесь будет классно.
-					p Нажмите кнопку ниже, чтобы начать флексить.
+					div.text-block
+						div.badge Тест
 
-					p #[button(data-action='start-test') Начать тест]
+						h2.title Как хорошо вы разбираетесь в новостях бизнеса
+
+						p.text По следам публикаций на vc.ru.
+
+						p.button #[button(data-action='start-test') Начать]
+
+					div.background
 
 				div.screen.screen-test
 					p Тут пока ничего нет.............................
