@@ -30,23 +30,25 @@ html(lang='ru')
 					p Включите его для прохождения теста, пожалуйсто!!!1
 
 				div.screen.screen-start
-					div.text-block
-						div.badge Тест
-
-						h2.title #{TITLE}
-
-						p.text #{DESCRIPTION}
-
-						p.button #[button(data-action='start-test') Начать]
-
 					div.background
+
+					div.start
+						div.start__badge Тест
+
+						h2.start__title #{TITLE}
+
+						p.start__text #{DESCRIPTION}
+
+						p.start__btn #[button(data-action='start-test') Начать]
 
 				div.screen.screen-test
 					p Тут пока ничего нет.............................
 
-				div.screen.screen-end
+				div.screen.screen-final
 
 		include inc/question-template.pug
+
+		include inc/final-template.pug
 
 		each JS in ['vendors/kamina.min', 'vendors/likely']
 			script(src=`${PATHS.js}/${JS}.js?v=${_V}` defer)

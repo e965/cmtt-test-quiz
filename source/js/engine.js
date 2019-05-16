@@ -6,6 +6,8 @@ import { RenderTest } from './modules/render-test.min.js'
 
 import { QUESTIONS } from './modules/questions.min.js'
 
+import { RESULTS } from './modules/results.min.js'
+
 let prepareQuestions = Q => {
 	let questions = Q
 
@@ -32,14 +34,6 @@ let prepareQuestions = Q => {
 	return questions
 }
 
-let showScreen = screen => {
-	let dataItemName = 'current'
-
-	delete $make.qs(`.screen[data-${dataItemName}]`).dataset[dataItemName]
-
-	$make.qs(`.screen-${screen}`).dataset[dataItemName] = ''
-}
-
 let updateButtonsActions = () => {
 	let buttonsWithActions = $make.qs('button[data-action]', ['a'])
 
@@ -49,7 +43,7 @@ let updateButtonsActions = () => {
 
 			switch (_action) {
 				case 'start-test':
-					showScreen('test'); break
+					U.showScreen('test'); break
 				default:
 					alert('На кнопку не назначено действие!')
 			}
@@ -58,12 +52,12 @@ let updateButtonsActions = () => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	showScreen('start')
+	U.showScreen('start')
 	updateButtonsActions()
 
 	let questions = prepareQuestions(QUESTIONS)
 
-	let test = new RenderTest(questions)
+	let test = new RenderTest(questions, RESULTS)
 
 	test.showQuestion()
 })

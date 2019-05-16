@@ -3,6 +3,14 @@
 // Утилиты
 
 export const U = {
+	showScreen(screen) {
+		let dataItemName = 'current'
+
+		delete $make.qs(`.screen[data-${dataItemName}]`).dataset[dataItemName]
+
+		$make.qs(`.screen-${screen}`).dataset[dataItemName] = ''
+	},
+
 	prepareText(text) {
 		let regExps = {
 			links: new RegExp(/\[link\|(?:[^\]]+)\|([^\]]+)\]/, 'g'),
@@ -77,5 +85,5 @@ export const U = {
 		}
 
 		return a;
-	}
+	},
 }

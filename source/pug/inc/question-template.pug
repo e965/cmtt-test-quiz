@@ -8,6 +8,6 @@ template#question
 
 		p.question__explanation
 
-		button.question__next-btn(data-action='next')
+		button.question__next-btn.bottom-btn(data-action='next')
 			span Продолжить
-			span.arrow →
+			img.icon(src=`${PATHS.img}/arrow.svg?v=${_V}` alt='arrow')

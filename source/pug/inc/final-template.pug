@@ -4,10 +4,13 @@ template#final
 
 		h3.final__text
 
-		ul.final__share
+		div.final__share
+			div.likely.likely--no-counters.likely--custom(data-title=`Тест: ${TITLE}` data-url='./')
+				div.facebook Поделиться
+				div.vkontakte
+				div.twitter(data-via='vcru')
+				div.telegram
 
-		button.question__next-btn(data-action='next')
+		button.final__refresh-btn.bottom-btn(data-action='final')
 			span Пройти ещё раз
-			img(src=`${PATHS.img}/refresh-arrow.svg?v=${_V}` alt='refresh arrow')
-
-	div.background
+			img.icon(src=`${PATHS.img}/refresh-arrow.svg?v=${_V}` alt='refresh arrow')

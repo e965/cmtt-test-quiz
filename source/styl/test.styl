@@ -10,7 +10,7 @@
 			background-position top 50px right 250px, bottom 70px right 450px, right bottom
 		}
 
-		.text-block {
+		.start {
 			width fit-content
 			max-width 500px
 
@@ -21,58 +21,64 @@
 			margin-left 100px
 
 			z-index 1
-		}
 
-		.badge {
-			width fit-content
-			padding 5px 10px
-
-			position absolute
-			top -35px; right 0
-
-			background-color #e25a76
-
-			color #fff
-
-			cursor default
-
-			&:after {
-				content: ''
+			&__badge {
+				width fit-content
+				padding 5px 10px
 
 				position absolute
-				bottom -15px; right 0
+				top -35px; right -10px
 
-				width 0; height 0
+				@supports not (-webkit-appearance:none) {
+					& {
+						right 0px
+					}
+				}
 
-				border-top 15px solid #ba4961
-				border-right 15px solid transparent
+				background-color #e25a76
+
+				color #fff
+
+				cursor default
+
+				&:after {
+					content: ''
+
+					position absolute
+					bottom -15px; right 0
+
+					width 0; height 0
+
+					border-top 15px solid #ba4961
+					border-right 15px solid transparent
+				}
 			}
-		}
 
-		.title {
-			font-size: 2em
-		}
+			&__title {
+				font-size 2em
+			}
 
-		.text {
-			margin-top: 20px
-		}
+			&__text {
+				margin-top 20px
+			}
 
-		.button {
-			margin-top 210px
+			&__btn {
+				margin-top 210px
 
-			button {
-				background-color #fff
-				border 0
+				button {
+					background-color #fff
+					border 0
 
-				box-shadow 0px 15px 22px rgba(#000, .2)
+					box-shadow 0px 15px 22px rgba(#000, .2)
 
-				padding 10px 40px
+					padding 10px 40px
 
-				font-weight 500
-				font-size 1.3em
+					font-weight 500
+					font-size 1.3em
 
-				&:hover {
-					opacity .8
+					&:hover {
+						opacity .8
+					}
 				}
 			}
 		}
@@ -177,31 +183,138 @@
 					display none
 				}
 			}
+		}
+	}
 
-			&__next-btn {
-				position fixed
-				bottom 50px
+	&-final {
+		.background {
+			background-repeat no-repeat
 
-				background-color transparent
-				border 0
+			background-size 400px
+			background-position center right
 
-				font-size 1.4em
-				font-weight 500
+			results = { '0': 'footballer', '3': 'tyan', '5': 'hand', '7': 'ded', '8': 'panfilov' }
 
-				& > * {
-					display inline-block
-					vertical-align middle
-					pointer-events none
-				}
-
-				&:hover {
-					color var(--links-hover-color)
-				}
-
-				.arrow {
-					margin-left 5px
+			for key, $image in results {
+				&[data-score-key=\'{key}\'] {
+					background-image url($imgPath/screen_final/$image.png?v=$_V)
 				}
 			}
+
+			&[data-score-key='5'] {
+				background-size 300px
+				background-position bottom 50px right
+			}
+
+			&[data-score-key='7'] {
+				background-size 350px
+			}
+
+			&[data-score-key='0'], &[data-score-key='8'] {
+				background-size 550px
+			}
+		}
+
+		.final {
+			width fit-content
+			max-width 500px
+
+			position relative
+
+			margin-top 30px
+			margin-left 250px
+
+			z-index 1
+
+			&__text {
+				margin-top 50px
+
+				font-size 2.5em
+				line-height 1.2
+			}
+
+			&__share {
+				margin-top 20px
+
+				.likely {
+					display flex
+
+					&__widget {
+						display flex
+						vertical-align middle
+
+						& > * {
+							vertical-align middle
+						}
+
+						width: fit-content; height 50px
+						min-width 50px
+
+						justify-content center
+						align-items center
+
+						background-color #fff
+						box-shadow 0px 15px 22px rgba(#000, .2)
+
+						font-size 1.1em
+
+						cursor pointer
+						user-select none
+
+						&--facebook {
+							padding 0 15px
+							color #4267b2
+						}
+
+						&:not(:first-child) {
+							margin-left 15px
+						}
+
+						&:hover {
+							opacity .8
+						}
+					}
+
+					&__icon {
+						&, & svg {
+							width: 1.3em; height: 1.3em
+						}
+
+						colors = { 'facebook': #4267b2, 'vkontakte': #5b88bd, 'twitter': #1da1f2, 'telegram': #0088cc }
+
+						for key, value in colors {
+							&--{key} path {
+								fill value
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.bottom-btn {
+		position fixed
+		bottom 50px
+
+		background-color transparent
+		border 0
+
+		font-size 1.4em
+		font-weight 500
+
+		& > * {
+			display inline-block
+			vertical-align middle
+			pointer-events none
+		}
+
+		&:hover {
+			color var(--links-hover-color)
+		}
+
+		.icon {
+			margin-left 5px
 		}
 	}
 }
