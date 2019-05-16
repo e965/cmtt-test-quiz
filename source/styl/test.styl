@@ -83,8 +83,9 @@
 
 		{$question} {
 			width 500px
+			margin 30px auto 0
 
-			margin 0 auto
+			position relative
 
 			&:not([data-answered]) {
 				{$question} {
@@ -104,23 +105,101 @@
 				}
 			}
 
+			&__title {
+				margin-top 20px
+
+				font-size 1.5em
+
+				line-height 1.5
+				font-weight 500
+			}
+
 			&__answers {
+				--_border-color #edcdd3
+				--_text-color #000
+
+				margin-top 20px
+
 				li {
 					list-style none
+
+					&:not([data-selected]) {
+						button {
+							&:hover {
+								opacity .8
+							}
+						}
+					}
+
+					&[data-selected] {
+						button {
+							font-weight 500
+
+							cursor default
+						}
+					}
+
+					&[data-right] {
+						--_border-color #43a457
+						--_text-color #43a457
+					}
+
+					&[data-wrong] {
+						--_border-color #e25a76
+						--_text-color #e25a76
+					}
+
+					&:not(:first-child) {
+						margin-top 10px
+					}
+				}
+
+				button {
+					background-color #fff
+
+					border solid 2px var(--_border-color)
+
+					text-align left
+
+					font-size 1.05em
+					color var(--_text-color)
+
+					padding 10px 40px
 				}
 			}
 
 			&__explanation {
+				margin-top 20px
+
+				line-height 1.5
+
 				&:empty {
 					display none
 				}
 			}
 
 			&__next-btn {
+				position fixed
+				bottom 50px
+
+				background-color transparent
+				border 0
+
+				font-size 1.4em
+				font-weight 500
+
 				& > * {
 					display inline-block
 					vertical-align middle
 					pointer-events none
+				}
+
+				&:hover {
+					color var(--links-hover-color)
+				}
+
+				.arrow {
+					margin-left 5px
 				}
 			}
 		}

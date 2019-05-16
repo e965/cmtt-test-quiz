@@ -4,7 +4,7 @@ html(lang='ru')
 
 		include inc/vars.pug
 
-		title #{TITLE}
+		title Тест: #{TITLE}
 		meta(charset='utf-8')
 
 		meta(name='robots' content='noindex, nofollow')
@@ -16,15 +16,17 @@ html(lang='ru')
 		each CSS in ['power', 'test']
 			link(rel='stylesheet' href=`${PATHS.css}/${CSS}.min.css?v=${_V}`)
 
-	body(data-test-q-num='0' data-test-score='0')
+		noscript
+			style .screen.screen-nojs { display: flex }
+
+	body
 
 		div.content.content__test
 
 			main.main
 
-				data.screen.no-js(data-current)
+				div.screen.screen-nojs(data-current)
 					p У вас не включен JavaScript в браузере :(
-
 					p Включите его для прохождения теста, пожалуйсто!!!1
 
 				div.screen.screen-start

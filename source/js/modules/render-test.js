@@ -4,6 +4,8 @@ export class RenderTest {
 	constructor(Q) {
 		this.questions = Q
 
+		this.qLength = this.questions.length
+
 		this.qNum = 0
 		this.score = 0
 	}
@@ -12,16 +14,21 @@ export class RenderTest {
 		return this.questions[this.qNum]
 	}
 
-	showQuestion() {
-		let questionTemplate = $make.qs('#question')
+	nextQuestion() {
+		this.qNum++
+		this.showQuestion()
+	}
 
+	increaseScore() { this.score++ }
+
+	showQuestion() {
 		let currQ = this.getCurrentQuestion()
 
-		let _content = document.importNode($make.qs('#question').content, true)
+		let qTemplate = document.importNode($make.qs('#question').content, true)
 
-		let qNode = $make.qsf('.question', _content)
+		let qNode = $make.qsf('.question', qTemplate)
 
-		$make.qsf('.question__counter', qNode).textContent = `${this.qNum + 1}/${this.questions.length}`
+		$make.qsf('.question__counter', qNode).textContent = `${this.qNum + 1}/${this.qLength}`
 
 		$make.qsf('.question__title', qNode).textContent = currQ.question
 
@@ -50,21 +57,22 @@ export class RenderTest {
 			$make.qsf('.question__answers', qNode).appendChild(listItem)
 		})
 
-		$make.qsf('.question__next-btn', qNode).addEventListener('click', e => {
-			this.nextQuestion()
+		let nextQbtn = $make.qsf('.question__next-btn', qNode)
 
-			console.log(this.score)
-		})
+		if (this.qNum + 1 !== this.qLength) {
+			nextQbtn.addEventListener('click', e => { this.nextQuestion() })
+		} else {
+			nextQbtn.firstChild.textContent = 'Завершить тест'
+			nextQbtn.addEventListener('click', e => { this.final() })
+		}
+
 
 		$make.qs('.screen-test').textContent = ''
 
 		$make.qs('.screen-test').appendChild(qNode)
 	}
 
-	nextQuestion() {
-		this.qNum++
-		this.showQuestion()
+	final() {
+		alert(`Ваш счёт: ${this.score} из ${this.qLength}`)
 	}
-
-	increaseScore() { this.score++ }
 }

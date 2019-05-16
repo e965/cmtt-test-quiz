@@ -5,14 +5,12 @@
 export const U = {
 	prepareText(text) {
 		let regExps = {
-			links: /\[link\|([^\]]+)\|([^\]]+)\]/,
-			bold: /\[b\|([^\]]+)\]/,
-			quote: /\[q\|([^\]]+)\]/,
+			links: new RegExp(/\[link\|(?:[^\]]+)\|([^\]]+)\]/, 'g'),
+			bold: new RegExp(/\[b\|(?:[^\]]+)\]/, 'g'),
+			quote: new RegExp(/\[q\|(?:[^\]]+)\]/, 'g'),
 		}
 
-		let linksInText = text.match(
-			new RegExp(regExps.links, 'g')
-		)
+		let linksInText = text.match(regExps.links)
 
 		if (linksInText) {
 			linksInText.forEach(link => {
@@ -30,9 +28,7 @@ export const U = {
 			})
 		}
 
-		let boldInText = text.match(
-			new RegExp(regExps.bold, 'g')
-		)
+		let boldInText = text.match(regExps.bold)
 
 		if (boldInText) {
 			boldInText.forEach(bold => {
@@ -50,9 +46,7 @@ export const U = {
 			})
 		}
 
-		let quoteInText = text.match(
-			new RegExp(regExps.quote, 'g')
-		)
+		let quoteInText = text.match(regExps.quote)
 
 		if (quoteInText) {
 			quoteInText.forEach(quote => {
@@ -61,7 +55,7 @@ export const U = {
 				text = text.replace(
 					regExps.quote,
 					$create.elem(
-						'b',
+						'q',
 						_quote[1].replace(/]/g, ''),
 						'',
 						['html']
@@ -71,5 +65,17 @@ export const U = {
 		}
 
 		return text
+	},
+
+	shuffleArray(a) {
+		// взято отсюда: https://stackoverflow.com/a/6274381
+
+		for (let i = a.length - 1; i > 0; i--) {
+			const j = Math.floor(Math.random() * (i + 1));
+
+			[a[i], a[j]] = [a[j], a[i]];
+		}
+
+		return a;
 	}
 }

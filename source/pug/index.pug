@@ -4,7 +4,7 @@ html(lang='ru')
 
 		include inc/vars.pug
 
-		title #{TITLE}
+		title Тест: #{TITLE} — Промо на vc.ru
 		meta(charset='utf-8')
 
 		meta(name='description' content=`${DESCRIPTION}`)
@@ -12,7 +12,7 @@ html(lang='ru')
 		each og in [{ what: 'locale', content: 'ru_RU' }, { what: 'type', content: 'website' }, { what: 'image', content: `${PATHS.img}/share.png?v=${_V}` }]
 			meta(property=`og:${og.what}` content=`${og.content}`)
 
-		each og in [{ what: 'card', content: 'summary_large_image' }, { what: 'title', content: `${TITLE}` }, { what: 'description', content: `${DESCRIPTION}` }, { what: 'image', content: `${PATHS.img}/share.png?v=${VERSION}` }]
+		each og in [{ what: 'card', content: 'summary_large_image' }, { what: 'title', content: `Тест: ${TITLE} — Промо на vc.ru` }, { what: 'description', content: `${DESCRIPTION}` }, { what: 'image', content: `${PATHS.img}/share.png?v=${VERSION}` }]
 			meta(name=`twitter:${og.what}` content=`${og.content}`)
 
 		link(rel="shortcut icon" href=`${PATHS.img}/vc-favicon.ico?v=${_V}`)

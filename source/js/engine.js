@@ -11,11 +11,17 @@ let prepareQuestions = Q => {
 
 	let e_c_t = 'expl_common_text'
 
+	U.shuffleArray(questions)
+
 	questions.forEach(question => {
+		U.shuffleArray(question.answers)
+
 		question.answers.forEach(answer => {
-			if (e_c_t in question) {
+			if (e_c_t in question && !('special_expl' in answer)) {
 				answer.explanation += ' ' + question[e_c_t]
 			}
+
+			answer.text = U.prepareText(answer.text)
 
 			answer.explanation = U.prepareText(answer.explanation)
 		})
