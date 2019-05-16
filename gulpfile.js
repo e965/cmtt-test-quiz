@@ -191,13 +191,13 @@ gulp.task('dist', gulp.series('dist:clean', 'dist:copy'))
 
 /* Команды для сборки и разработки */
 
-gulp.task('build', gulp.parallel('pug:build', 'js:assets:build', 'js:get-vendors', 'stylus:build', 'css:get-vendors'))
-
 gulp.task('build:clean', () => tube([
 	gulp.src(dirs.build, { read: false, allowEmpty: true }),
 	clean()
 ]))
 
+gulp.task('build', gulp.parallel('pug:build', 'js:assets:build', 'js:get-vendors', 'stylus:build', 'css:get-vendors'))
+
 gulp.task('dev', gulp.parallel('liveReload', 'pug:dev', 'js:assets:dev', 'js:get-vendors', 'stylus:dev', 'css:get-vendors'))
 
-gulp.task('default', gulp.series('build', 'dist'))
+gulp.task('default', gulp.series('build:clean', 'build', 'dist'))

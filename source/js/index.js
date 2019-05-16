@@ -27,4 +27,16 @@ let updateButtonsActions = () => {
 
 document.addEventListener('DOMContentLoaded', () => {
 	updateButtonsActions()
+
+	void(() => {
+		let frameWidth = $check.get('frame-width')
+
+		if (
+			frameWidth &&
+			Number.isInteger(Number(frameWidth)) &&
+			Number(frameWidth) > 1
+		) {
+			document.documentElement.style.setProperty('--test-width', `${frameWidth}px`)
+		}
+	})()
 })

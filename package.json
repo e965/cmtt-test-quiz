@@ -2,10 +2,14 @@
 	"name": "cmtt-test",
 	"description": "Тестовое задание для вакансии frontend-разработчика спецпроектов в «Комитете».",
 	"private": true,
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"author": "Dmitry <dmitry@cojam.ru> (https://e965.ru)",
 	"repository": "github:tehcojam/cmtt-test",
 	"license": "MIT",
+	"engines": {
+		"node": ">= 12.2.0",
+		"npm": ">= 6.9.0"
+	},
 	"scripts": {
 		"build": "gulp build",
 		"dev": "gulp dev",

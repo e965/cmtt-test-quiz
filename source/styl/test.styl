@@ -1,13 +1,26 @@
+body, .main, .screen {
+	overflow hidden
+}
+
 .screen {
 	&-start {
 		.background {
+			--img-tinkoff-pos top 50px right 250px
+			--img-tinkoff-size 90px
+
+			--img-money-pos bottom 70px right 450px
+			--img-money-size 200px
+
+			--img-paper-pos right bottom
+			--img-paper-size 400px
+
 			background-image url($imgPath/screen_start/tinkoff.png?v=$_V), url($imgPath/screen_start/money.png?v=$_V), url($imgPath/screen_start/paper.png?v=$_V)
 
 			background-repeat no-repeat
 
-			background-size 90px, 200px, 400px
+			background-size var(--img-tinkoff-size), var(--img-money-size), var(--img-paper-size)
 
-			background-position top 50px right 250px, bottom 70px right 450px, right bottom
+			background-position var(--img-tinkoff-pos), var(--img-money-pos), var(--img-paper-pos)
 		}
 
 		.start {
@@ -23,15 +36,21 @@
 			z-index 1
 
 			&__badge {
-				width fit-content
+				width min-content
 				padding 5px 10px
 
 				position absolute
 				top -35px; right -10px
 
-				@supports not (-webkit-appearance:none) {
+				@supports not (-webkit-appearance none) {
 					& {
 						right 0px
+					}
+				}
+
+				@supports (-ms-ime-align:auto) {
+					& {
+						width 60px
 					}
 				}
 
@@ -42,7 +61,7 @@
 				cursor default
 
 				&:after {
-					content: ''
+					content ''
 
 					position absolute
 					bottom -15px; right 0
@@ -63,7 +82,7 @@
 			}
 
 			&__btn {
-				margin-top 210px
+				font-size 1em !important
 
 				button {
 					background-color #fff
@@ -234,7 +253,7 @@
 			}
 
 			&__share {
-				margin-top 20px
+				margin-top 30px
 
 				.likely {
 					display flex
@@ -247,7 +266,7 @@
 							vertical-align middle
 						}
 
-						width: fit-content; height 50px
+						width fit-content; height 50px
 						min-width 50px
 
 						justify-content center
@@ -277,7 +296,7 @@
 
 					&__icon {
 						&, & svg {
-							width: 1.3em; height: 1.3em
+							width 1.3em; height 1.3em
 						}
 
 						colors = { 'facebook': #4267b2, 'vkontakte': #5b88bd, 'twitter': #1da1f2, 'telegram': #0088cc }
@@ -303,7 +322,7 @@
 		font-size 1.4em
 		font-weight 500
 
-		& > * {
+		span, img {
 			display inline-block
 			vertical-align middle
 			pointer-events none
@@ -315,6 +334,151 @@
 
 		.icon {
 			margin-left 5px
+		}
+	}
+}
+
+@media screen and (max-width 959px) {
+	.screen {
+		&-start {
+			.background {
+				--img-tinkoff-pos top 5px left 400px
+			}
+
+			.start {
+				margin-top 120px
+			}
+		}
+
+		&-final {
+			.final {
+				margin-left 200px
+			}
+		}
+	}
+}
+
+@media screen and (max-width 699px) {
+	.screen {
+		&-start {
+			.background {
+				--img-tinkoff-pos top -5px left 300px
+
+				--img-money-pos bottom 120px left 50px
+				--img-money-size 150px
+
+				--img-paper-size 350px
+			}
+
+			.start {
+				margin-left 50px
+			}
+		}
+
+		&-final {
+			.background {
+				&[data-score-key='0'] {
+					//background-position bottom 50px right
+				}
+
+				&[data-score-key='3'] {
+					background-size 300px
+					background-position bottom 40px right -50px
+				}
+
+				&[data-score-key='5'] {
+					background-size 200px
+					background-position center right
+				}
+
+				&[data-score-key='7'] {
+					background-image url($imgPath/screen_final/ded-suffering.png?v=$_V)
+					background-size 280px
+					background-position bottom right
+				}
+
+				&[data-score-key='0'], &[data-score-key='8'] {
+					background-size 450px
+				}
+			}
+
+			.final {
+				margin-left 50px
+
+				&__text {
+					width calc(100% - 100px)
+				}
+			}
+		}
+	}
+}
+
+@media screen and (max-width 629px) {
+	.screen {
+		.background {
+			display none
+		}
+
+		&-start {
+			.start {
+				margin-top 70px
+				margin-right 20px
+
+				&__badge {
+					left -15px
+
+					&:after {
+						left 0
+					}
+				}
+			}
+		}
+
+		&-test {
+			.question {
+				width auto
+				padding 0 20px
+
+				&__title {
+					margin-top 5px
+					font-size 1em
+				}
+
+				&__answers {
+					button {
+						width 100%
+						padding 5px 5px
+						text-align center
+					}
+				}
+			}
+		}
+
+		&-final {
+			.final {
+				margin-left 20px
+
+				&__text {
+					margin-top 20px
+					width auto
+				}
+
+				&__share {
+					margin-top 30px
+
+					.likely {
+						display flex
+
+						&__button {
+							display none
+						}
+					}
+				}
+			}
+		}
+
+		.bottom-btn {
+			bottom 40px
 		}
 	}
 }

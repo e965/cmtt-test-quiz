@@ -54,7 +54,8 @@ b, strong {
 		grid-template-rows 50px 1fr
 
 		iframe {
-			width calc(var(--test-width) + 20px)
+			width: 100%;
+			max-width calc(var(--test-width) + 20px)
 			height calc(var(--test-height) + 20px)
 			border 0
 		}
@@ -72,7 +73,8 @@ b, strong {
 }
 
 .screen {
-	width var(--test-width); height var(--test-height)
+	width: 100%; height var(--test-height)
+	max-width var(--test-width)
 
 	background-image url($imgPath/test-background.png?v=$_V)
 	background-repeat no-repeat

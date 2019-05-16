@@ -84,10 +84,6 @@
 		}
 	}
 
-	&__auth {
-
-	}
-
 	&__write-btn {
 		a {
 			border 1px solid #ccc
@@ -102,6 +98,10 @@
 				background-color var(--links-hover-color)
 			}
 		}
+	}
+
+	&__auth {
+
 	}
 }
 
@@ -118,6 +118,14 @@
 			span {
 				display none
 			}
+		}
+	}
+}
+
+@media screen and (max-width 499px) {
+	.header {
+		&__menu, &__write-btn {
+			display none
 		}
 	}
 }

@@ -49,7 +49,7 @@ export class RenderTest {
 		$make.qsf('.question__counter', qNode).textContent = `${this.qNum + 1}/${this.qLength}`
 
 		// debuh
-		$make.qsf('.question__counter', qNode).addEventListener('click', e => {
+		$make.qsf('.question__counter', qNode).addEventListener('dblclick', e => {
 			this.score = Math.floor(Math.random() * (this.qLength + 1))
 			this.final()
 		})
@@ -61,19 +61,21 @@ export class RenderTest {
 			let answerBtn = $create.elem('button', answer.text, 'button button__answer')
 
 			answerBtn.addEventListener('click', e => {
-				qNode.dataset.answered = ''
-				listItem.dataset.selected = ''
+				if (!('answered' in qNode.dataset)) {
+					qNode.dataset.answered = ''
+					listItem.dataset.selected = ''
 
-				if ('right' in answer && answer.right) {
-					listItem.dataset.right = ''
+					if ('right' in answer && answer.right) {
+						listItem.dataset.right = ''
 
-					this.increaseScore()
-				} else {
-					listItem.dataset.wrong = ''
+						this.increaseScore()
+					} else {
+						listItem.dataset.wrong = ''
+					}
+
+					$make.qsf('.question__explanation', qNode).textContent = ''
+					$make.qsf('.question__explanation', qNode).insertAdjacentHTML('afterbegin', answer.explanation)
 				}
-
-				$make.qsf('.question__explanation', qNode).textContent = ''
-				$make.qsf('.question__explanation', qNode).insertAdjacentHTML('afterbegin', answer.explanation)
 			})
 
 			listItem.appendChild(answerBtn)
@@ -116,6 +118,13 @@ export class RenderTest {
 		$make.qsf('.final__score', finalScreenNode).textContent = `${this.score} из ${this.qLength} правильных ответов`
 
 		$make.qsf('.final__text', finalScreenNode).textContent = ourResult[1].text
+
+		let likelyNode = $make.qsf('.likely', finalScreenNode)
+
+		// проверка на <iframe>
+		likelyNode.dataset.url = (window.self == window.top)
+			? location.href
+			: parent.location.href
 
 		$make.qsf('.final__refresh-btn', finalScreenNode)
 			.addEventListener('click', e => {
