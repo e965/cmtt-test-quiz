@@ -6,15 +6,12 @@ export const U = {
 	prepareText(text) {
 		let regExps = {
 			links: /\[link\|([^\]]+)\|([^\]]+)\]/,
-			bold: /\[b\|([^\]]+)\]/
+			bold: /\[b\|([^\]]+)\]/,
+			quote: /\[q\|([^\]]+)\]/,
 		}
 
 		let linksInText = text.match(
 			new RegExp(regExps.links, 'g')
-		)
-
-		let boldInText = text.match(
-			new RegExp(regExps.bold, 'g')
 		)
 
 		if (linksInText) {
@@ -33,6 +30,10 @@ export const U = {
 			})
 		}
 
+		let boldInText = text.match(
+			new RegExp(regExps.bold, 'g')
+		)
+
 		if (boldInText) {
 			boldInText.forEach(bold => {
 				let _bold = bold.split('|')
@@ -42,6 +43,26 @@ export const U = {
 					$create.elem(
 						'b',
 						_bold[1].replace(/]/g, ''),
+						'',
+						['html']
+					)
+				)
+			})
+		}
+
+		let quoteInText = text.match(
+			new RegExp(regExps.quote, 'g')
+		)
+
+		if (quoteInText) {
+			quoteInText.forEach(quote => {
+				let _quote = quote.split('|')
+
+				text = text.replace(
+					regExps.quote,
+					$create.elem(
+						'b',
+						_quote[1].replace(/]/g, ''),
 						'',
 						['html']
 					)

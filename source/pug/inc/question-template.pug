@@ -1,7 +1,13 @@
 template#question
 	div.question
+		div.question__counter
+
 		h3.question__title
 
 		ul.question__answers
 
-		button(data-action='next') Следующий вопрос....
+		p.question__explanation
+
+		button.question__next-btn(data-action='next')
+			span Продолжить
+			span.arrow →

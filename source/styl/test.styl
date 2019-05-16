@@ -77,4 +77,52 @@
 			}
 		}
 	}
+
+	&-test {
+		$question = '.question'
+
+		{$question} {
+			width 500px
+
+			margin 0 auto
+
+			&:not([data-answered]) {
+				{$question} {
+					&__next-btn {
+						display none
+					}
+				}
+			}
+
+			&[data-answered] {
+				{$question} {
+					&__answers {
+						li:not([data-selected]) {
+							display none
+						}
+					}
+				}
+			}
+
+			&__answers {
+				li {
+					list-style none
+				}
+			}
+
+			&__explanation {
+				&:empty {
+					display none
+				}
+			}
+
+			&__next-btn {
+				& > * {
+					display inline-block
+					vertical-align middle
+					pointer-events none
+				}
+			}
+		}
+	}
 }

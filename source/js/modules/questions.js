@@ -101,10 +101,10 @@ export const QUESTIONS = [
 				text: '19%',
 				explanation: '[b|Нет], всё же именно',
 			}, {
-				text: '',
+				text: '21%',
 				explanation: '[b|Нет],',
 			}, {
-				text: '21%',
+				text: 'Никто не собирается повышать НДС, зато повысят НДФЛ',
 				explanation: '[b|Нет], всё же именно',
 			}
 		]
