@@ -13,15 +13,27 @@ export const U = {
 
 	prepareText(text) {
 		let regExps = {
-			links: new RegExp(/\[link\|(?:[^\]]+)\|([^\]]+)\]/, 'g'),
-			bold: new RegExp(/\[b\|(?:[^\]]+)\]/, 'g'),
-			quote: new RegExp(/\[q\|(?:[^\]]+)\]/, 'g'),
+			links:  new RegExp(/\[link\|(?:[^\]]+)\|([^\]]+)\]/),
+			bold:   new RegExp(/\[b\|(?:[^\]]+)\]/),
+			quote:  new RegExp(/\[q\|(?:[^\]]+)\]/),
 		}
 
-		let linksInText = text.match(regExps.links)
+		let regExps_keys = Object.keys(regExps)
 
-		if (linksInText) {
-			linksInText.forEach(link => {
+		let regExps_g = {}
+
+		regExps_keys.forEach(key => {
+			regExps_g[key] = new RegExp(regExps[key], 'g')
+		})
+
+		let matches = {}
+
+		regExps_keys.forEach(key => {
+			matches[key] = text.match(regExps_g[key])
+		})
+
+		if (matches.links) {
+			matches.links.forEach(link => {
 				let _link = link.split('|')
 
 				text = text.replace(
@@ -36,10 +48,8 @@ export const U = {
 			})
 		}
 
-		let boldInText = text.match(regExps.bold)
-
-		if (boldInText) {
-			boldInText.forEach(bold => {
+		if (matches.bold) {
+			matches.bold.forEach(bold => {
 				let _bold = bold.split('|')
 
 				text = text.replace(
@@ -54,10 +64,8 @@ export const U = {
 			})
 		}
 
-		let quoteInText = text.match(regExps.quote)
-
-		if (quoteInText) {
-			quoteInText.forEach(quote => {
+		if (matches.quote) {
+			matches.quote.forEach(quote => {
 				let _quote = quote.split('|')
 
 				text = text.replace(
@@ -80,10 +88,9 @@ export const U = {
 
 		for (let i = a.length - 1; i > 0; i--) {
 			const j = Math.floor(Math.random() * (i + 1));
-
-			[a[i], a[j]] = [a[j], a[i]];
+			[a[i], a[j]] = [a[j], a[i]]
 		}
 
-		return a;
+		return a
 	},
 }

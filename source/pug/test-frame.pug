@@ -9,9 +9,9 @@ html(lang='ru')
 
 		meta(name='robots' content='noindex, nofollow')
 
-		link(rel="shortcut icon" href=`${PATHS.img}/vc-favicon.ico?v=${_V}`)
+		link(rel='shortcut icon' href=`${PATHS.img}/vc-favicon.ico?v=${_V}`)
 
-		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic')
+		link(rel='stylesheet' href=`${FONT_URL}`)
 
 		each CSS in ['power', 'test']
 			link(rel='stylesheet' href=`${PATHS.css}/${CSS}.min.css?v=${_V}`)

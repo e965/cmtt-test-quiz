@@ -12,14 +12,19 @@ html(lang='ru')
 		each og in [{ what: 'locale', content: 'ru_RU' }, { what: 'type', content: 'website' }, { what: 'image', content: `${PATHS.img}/share.png?v=${_V}` }]
 			meta(property=`og:${og.what}` content=`${og.content}`)
 
-		each og in [{ what: 'card', content: 'summary_large_image' }, { what: 'title', content: `Тест: ${TITLE} — Промо на vc.ru` }, { what: 'description', content: `${DESCRIPTION}` }, { what: 'image', content: `${PATHS.img}/share.png?v=${VERSION}` }]
+		each og in [{ what: 'card', content: 'summary_large_image' }, { what: 'title', content: `Тест: ${TITLE} — Промо на vc.ru` }, { what: 'description', content: `${DESCRIPTION}` }, { what: 'image', content: `${PATHS.img}/share.png?v=${_V}` }]
 			meta(name=`twitter:${og.what}` content=`${og.content}`)
 
-		link(rel="shortcut icon" href=`${PATHS.img}/vc-favicon.ico?v=${_V}`)
+		link(rel='shortcut icon' href=`${PATHS.img}/vc-favicon.ico?v=${_V}`)
+
+		meta(name='apple-itunes-app' content='app-id=920638420, app-argument=vcru://index')
+
+		each platform in ['theme-color', 'msapplication-navbutton-color', 'apple-mobile-web-app-status-bar-style']
+			meta(name=`${platform}` content='#FEEBEF')
 
 		meta(name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no')
 
-		link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic')
+		link(rel='stylesheet' href=`${FONT_URL}`)
 
 		each CSS in ['power', 'header']
 			link(rel='stylesheet' href=`${PATHS.css}/${CSS}.min.css?v=${_V}`)
