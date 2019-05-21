@@ -1,9 +1,26 @@
+@import 'inc/mixins'
+
 body, .main, .screen {
 	overflow hidden
 }
 
+$sizes-tiers = {
+	'1': '959px',
+	'2': '699px',
+	'3': '629px',
+}
+
 .screen {
+	&[max-width~=\'{$sizes-tiers['3']}\'] {
+		.background {
+			visibility-hidden()
+		}
+	}
+
 	&-start {
+		padding-top 100px
+		padding-left 100px
+
 		.background {
 			--img-tinkoff-pos top 50px right 250px
 			--img-tinkoff-size 90px
@@ -24,14 +41,10 @@ body, .main, .screen {
 		}
 
 		.start {
-			width fit-content
+			width 100%; height 100%
 			max-width 500px
 
 			position relative
-
-			margin-top 100px
-			margin-bottom 50px
-			margin-left 100px
 
 			z-index 1
 
@@ -101,14 +114,53 @@ body, .main, .screen {
 				}
 			}
 		}
+
+		&[max-width~=\'{$sizes-tiers['1']}\'] {
+			padding-top 120px
+
+			.background {
+				--img-tinkoff-pos top 5px left 400px
+			}
+		}
+
+		&[max-width~=\'{$sizes-tiers['2']}\'] {
+			padding-left 50px
+
+			.background {
+				--img-tinkoff-pos top -5px left 300px
+
+				--img-money-pos bottom 120px left 50px
+				--img-money-size 150px
+
+				--img-paper-size 350px
+			}
+		}
+
+		&[max-width~=\'{$sizes-tiers['3']}\'] {
+			padding-top 70px
+			padding-right 20px
+
+			.start {
+				&__badge {
+					left -15px
+
+					&:after {
+						left 0
+					}
+				}
+			}
+		}
 	}
 
-	&-test {
+	&-quiz {
 		$question = '.question'
 
+		padding-top 30px
+
 		{$question} {
-			width 500px
-			margin 30px auto 0
+			width 100%; height 100%
+			max-width 500px
+			margin 0 auto
 
 			position relative
 
@@ -203,9 +255,32 @@ body, .main, .screen {
 				}
 			}
 		}
+
+		&[max-width~=\'{$sizes-tiers['2']}\'] {
+			.question {
+				width auto
+				padding 0 20px
+
+				&__title {
+					margin-top 5px
+					font-size 1em
+				}
+
+				&__answers {
+					button {
+						width 100%
+						padding 5px 10px
+						text-align center
+					}
+				}
+			}
+		}
 	}
 
 	&-final {
+		padding-top 30px
+		padding-left 250px
+
 		.background {
 			background-repeat no-repeat
 
@@ -235,13 +310,10 @@ body, .main, .screen {
 		}
 
 		.final {
-			width fit-content
+			width 100%; height 100%
 			max-width 500px
 
 			position relative
-
-			margin-top 30px
-			margin-left 250px
 
 			z-index 1
 
@@ -310,77 +382,15 @@ body, .main, .screen {
 				}
 			}
 		}
-	}
 
-	.bottom-btn {
-		position fixed
-		bottom 50px
-
-		background-color transparent
-		border 0
-
-		font-size 1.4em
-		font-weight 500
-
-		span, img {
-			display inline-block
-			vertical-align middle
-			pointer-events none
+		&[max-width~=\'{$sizes-tiers['1']}\'] {
+			padding-left 200px
 		}
 
-		&:hover {
-			color var(--links-hover-color)
-		}
+		&[max-width~=\'{$sizes-tiers['2']}\'] {
+			padding-left 50px
 
-		.icon {
-			margin-left 5px
-		}
-	}
-}
-
-@media screen and (max-width 959px) {
-	.screen {
-		&-start {
 			.background {
-				--img-tinkoff-pos top 5px left 400px
-			}
-
-			.start {
-				margin-top 120px
-			}
-		}
-
-		&-final {
-			.final {
-				margin-left 200px
-			}
-		}
-	}
-}
-
-@media screen and (max-width 699px) {
-	.screen {
-		&-start {
-			.background {
-				--img-tinkoff-pos top -5px left 300px
-
-				--img-money-pos bottom 120px left 50px
-				--img-money-size 150px
-
-				--img-paper-size 350px
-			}
-
-			.start {
-				margin-left 50px
-			}
-		}
-
-		&-final {
-			.background {
-				&[data-score-key='0'] {
-					//background-position bottom 50px right
-				}
-
 				&[data-score-key='3'] {
 					background-size 300px
 					background-position bottom 40px right -50px
@@ -403,61 +413,16 @@ body, .main, .screen {
 			}
 
 			.final {
-				margin-left 50px
-
 				&__text {
 					width calc(100% - 100px)
 				}
 			}
 		}
-	}
-}
 
-@media screen and (max-width 629px) {
-	.screen {
-		.background {
-			display none
-		}
+		&[max-width~=\'{$sizes-tiers['3']}\'] {
+			padding-left 20px
 
-		&-start {
-			.start {
-				margin-top 70px
-				margin-right 20px
-
-				&__badge {
-					left -15px
-
-					&:after {
-						left 0
-					}
-				}
-			}
-		}
-
-		&-test {
-			.question {
-				width auto
-				padding 0 20px
-
-				&__title {
-					margin-top 5px
-					font-size 1em
-				}
-
-				&__answers {
-					button {
-						width 100%
-						padding 5px 5px
-						text-align center
-					}
-				}
-			}
-		}
-
-		&-final {
 			.final {
-				margin-left 20px
-
 				&__text {
 					margin-top 20px
 					width auto
@@ -476,9 +441,30 @@ body, .main, .screen {
 				}
 			}
 		}
+	}
 
-		.bottom-btn {
-			bottom 40px
+	.bottom-btn {
+		position absolute
+		bottom 50px
+
+		background-color transparent
+		border 0
+
+		font-size 1.4em
+		font-weight 500
+
+		span, img {
+			display inline-block
+			vertical-align middle
+			pointer-events none
+		}
+
+		&:hover {
+			color var(--links-hover-color)
+		}
+
+		.icon {
+			margin-left 5px
 		}
 	}
 }

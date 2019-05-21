@@ -2,11 +2,9 @@
 
 import { U } from './modules/u.min.js'
 
-import { RenderTest } from './modules/render-test.min.js'
+import { QuizRenderer } from './modules/quiz-renderer.min.js'
 
-import { QUESTIONS } from './modules/questions.min.js'
-
-import { RESULTS } from './modules/results.min.js'
+import { QUIZ_DATA } from './modules/quiz-data.min.js'
 
 let prepareQuestions = Q => {
 	let questions = Q
@@ -38,8 +36,8 @@ let updateButtonsActions = () => {
 			let _action = e.target.dataset.action
 
 			switch (_action) {
-				case 'start-test':
-					U.showScreen('test'); break
+				case 'start-quiz':
+					U.showScreen('quiz'); break
 				default:
 					alert('На кнопку не назначено действие!')
 			}
@@ -48,12 +46,31 @@ let updateButtonsActions = () => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-	U.showScreen('start')
+	U.showScreen('loading')
+
 	updateButtonsActions()
 
-	let questions = prepareQuestions(QUESTIONS)
+	let questions = prepareQuestions(QUIZ_DATA.questions)
 
-	let test = new RenderTest(questions, RESULTS)
+	let test = new QuizRenderer(questions, QUIZ_DATA.results)
 
 	test.showQuestion()
+
+	void(() => {
+		let quizWidth = $check.get('quiz-width')
+
+		if (
+			quizWidth &&
+			Number.isInteger(Number(quizWidth)) &&
+			Number(quizWidth) > 1
+		) {
+			document.documentElement.style.setProperty('--quiz-width', `${quizWidth}px`)
+		}
+	})()
+})
+
+window.addEventListener('load', () => {
+	ElementQueries.init()
+
+	U.showScreen('start')
 })

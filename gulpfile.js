@@ -56,7 +56,7 @@ let paths = {
 	},
 
 	js: {
-		dev:    [`${dirs.dev}/js/**/*.js`],
+		dev: [`${dirs.dev}/js/**/*.js`],
 
 		prod:          `${dirs.build}/${dirs.assets}/js/`,
 		prod_vendors:  `${dirs.build}/${dirs.assets}/js/vendors/`,
@@ -64,18 +64,14 @@ let paths = {
 		vendors: {
 			kamina: `${getPackageDir('kamina-js')}/dist/kamina.min.js`,
 			likely: `${getPackageDir('cmtt-likely')}/release/likely.js`,
+			ceq_eq: `${getPackageDir('css-element-queries')}/src/ElementQueries.js`,
+			ceq_rs: `${getPackageDir('css-element-queries')}/src/ResizeSensor.js`,
 		},
 	},
 
 	css: {
-		dev:   `${dirs.dev}/styl/**/*.styl`,
-
-		prod:          `${dirs.build}/${dirs.assets}/css/`,
-		prod_vendors:  `${dirs.build}/${dirs.assets}/css/vendors/`,
-
-		vendors: {
-			likely: `${getPackageDir('cmtt-likely')}/release/likely.css`,
-		},
+		dev:   [`${dirs.dev}/styl/**/*.styl`, `!${dirs.dev}/styl/inc/**/*.styl`],
+		prod:   `${dirs.build}/${dirs.assets}/css/`
 	},
 }
 
@@ -117,8 +113,8 @@ gulp.task('pug:dev', () => tube(
 let jsTubes = (dest = paths.js.prod) => [
 	plumber(),
 	minifyJS({}),
-	bom(),
 	rename({ suffix: '.min' }),
+	bom(),
 	gulp.dest(dest)
 ]
 
@@ -134,9 +130,16 @@ gulp.task('js:assets:dev', () => tube(
 
 gulp.task('js:get-vendors', () => tube([
 	gulp.src(Object.values(paths.js.vendors)),
+	minifyJS({}),
+	rename(path => {
+		if (!path.basename.endsWith('.min')) {
+			path.extname = '.min' + path.extname
+		}
+	}),
 	bom(),
 	gulp.dest(paths.js.prod_vendors)
 ]))
+
 
 /* Сборка Stylus */
 
@@ -149,7 +152,6 @@ let stylusTube = [
 			'$_V': project.version
 		},
 	}),
-	bom(),
 	rename({ suffix: '.min' }),
 	cleanCSS(),
 	bom(),
@@ -165,12 +167,6 @@ gulp.task('stylus:dev', () => tube(
 	[watch(paths.css.dev, { ignoreInitial: false })]
 		.concat(stylusTube, [reloadServer()])
 ))
-
-gulp.task('css:get-vendors', () => tube([
-	gulp.src(Object.values(paths.css.vendors)),
-	bom(),
-	gulp.dest(paths.css.prod_vendors)
-]))
 
 /* Копирование файлов из dirs.build и dirs.dist_static в одну общую dirs.dist */
 
@@ -196,8 +192,8 @@ gulp.task('build:clean', () => tube([
 	clean()
 ]))
 
-gulp.task('build', gulp.parallel('pug:build', 'js:assets:build', 'js:get-vendors', 'stylus:build', 'css:get-vendors'))
+gulp.task('build', gulp.parallel('pug:build', 'js:assets:build', 'js:get-vendors', 'stylus:build'))
 
-gulp.task('dev', gulp.parallel('liveReload', 'pug:dev', 'js:assets:dev', 'js:get-vendors', 'stylus:dev', 'css:get-vendors'))
+gulp.task('dev', gulp.parallel('liveReload', 'pug:dev', 'js:assets:dev', 'js:get-vendors', 'stylus:dev'))
 
 gulp.task('default', gulp.series('build:clean', 'build', 'dist'))

@@ -1,6 +1,6 @@
 import { U } from './u.min.js'
 
-export class RenderTest {
+export class QuizRenderer {
 	constructor(Q, R) {
 		this.questions = Q
 		this.results = R
@@ -25,7 +25,7 @@ export class RenderTest {
 	increaseScore() { this.score++ }
 
 	showTest() {
-		U.showScreen('test')
+		U.showScreen('quiz')
 	}
 
 	refresh() {
@@ -92,9 +92,11 @@ export class RenderTest {
 			nextQbtn.addEventListener('click', e => { this.final() })
 		}
 
-		$make.qs('.screen-test').textContent = ''
+		let quizScreen = $make.qs('.screen-quiz')
 
-		$make.qs('.screen-test').appendChild(qNode)
+		U.clearNode(quizScreen, ['resize-sensor'])
+
+		quizScreen.appendChild(qNode)
 	}
 
 	final() {
@@ -133,14 +135,15 @@ export class RenderTest {
 				this.showTest()
 			})
 
-		$make.qs('.screen-final').textContent = ''
+		let finalScreen = $make.qs('.screen-final')
 
-		$make.qs('.screen-final').appendChild(finalScreenBackground)
+		U.clearNode(finalScreen, ['resize-sensor'])
 
-		$make.qs('.screen-final').appendChild(finalScreenNode)
-
-		U.showScreen('final')
+		finalScreen.appendChild(finalScreenBackground)
+		finalScreen.appendChild(finalScreenNode)
 
 		setTimeout(likely.initiate, 0)
+
+		U.showScreen('final')
 	}
 }

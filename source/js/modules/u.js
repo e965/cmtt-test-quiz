@@ -93,4 +93,17 @@ export const U = {
 
 		return a
 	},
+
+	clearNode(_node, exceptions = []) {
+		if (_node.hasChildNodes()) {
+			_node.childNodes.forEach(node_ => {
+				exceptions.forEach(exception => {
+					if (!node_.classList.contains(exception)) {
+						node_.remove()
+					}
+				})
+
+			})
+		}
+	},
 }

@@ -1,3 +1,5 @@
+@import 'inc/mixins'
+
 * {
 	padding 0; margin 0
 	box-sizing border-box
@@ -6,8 +8,8 @@
 :root {
 	--links-hover-color #e25a76
 
-	--test-width 1000px
-	--test-height 530px
+	--quiz-width 1000px
+	--quiz-height 530px
 }
 
 html, body, .content {
@@ -47,23 +49,10 @@ b, strong {
 }
 
 .content {
-	&__index {
-		display grid
+	display grid
 
-		grid-template-columns 1fr
-		grid-template-rows 50px 1fr
-
-		iframe {
-			width: 100%;
-			max-width calc(var(--test-width) + 20px)
-			height calc(var(--test-height) + 20px)
-			border 0
-		}
-
-		.main {
-			padding: 20px
-		}
-	}
+	grid-template-columns 1fr
+	grid-template-rows 1fr
 }
 
 .main {
@@ -73,10 +62,10 @@ b, strong {
 }
 
 .screen {
-	width: 100%; height var(--test-height)
-	max-width var(--test-width)
+	width: 100%; height var(--quiz-height)
+	max-width var(--quiz-width)
 
-	background-image url($imgPath/test-background.png?v=$_V)
+	background-image url($imgPath/background.png?v=$_V)
 	background-repeat no-repeat
 	background-size cover
 
@@ -87,16 +76,15 @@ b, strong {
 	box-shadow 0px 0px 4px rgba(#000, .2)
 
 	&:not([data-current]) {
-		display none
+		visibility-hidden()
 	}
 
-	&-nojs {
-		display none
+	&-loading {
+		display flex
 
 		flex-direction column
 		justify-content center
 		align-items center
-
 		font-size 1.3em
 	}
 
@@ -121,4 +109,8 @@ b, strong {
 
 		z-index 0
 	}
+}
+
+.cache {
+	visibility-hidden()
 }

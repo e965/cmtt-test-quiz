@@ -4,7 +4,7 @@ html(lang='ru')
 
 		include inc/vars.pug
 
-		title Тест: #{TITLE} — Промо на vc.ru
+		title #{TITLE_FULL}
 		meta(charset='utf-8')
 
 		meta(name='description' content=`${DESCRIPTION}`)
@@ -12,7 +12,7 @@ html(lang='ru')
 		each og in [{ what: 'locale', content: 'ru_RU' }, { what: 'type', content: 'website' }, { what: 'image', content: `${PATHS.img}/share.png?v=${_V}` }]
 			meta(property=`og:${og.what}` content=`${og.content}`)
 
-		each og in [{ what: 'card', content: 'summary_large_image' }, { what: 'title', content: `Тест: ${TITLE} — Промо на vc.ru` }, { what: 'description', content: `${DESCRIPTION}` }, { what: 'image', content: `${PATHS.img}/share.png?v=${_V}` }]
+		each og in [{ what: 'card', content: 'summary_large_image' }, { what: 'title', content: `${TITLE_FULL}` }, { what: 'description', content: `${DESCRIPTION}` }, { what: 'image', content: `${PATHS.img}/share.png?v=${_V}` }]
 			meta(name=`twitter:${og.what}` content=`${og.content}`)
 
 		link(rel='shortcut icon' href=`${PATHS.img}/vc-favicon.ico?v=${_V}`)
@@ -26,18 +26,51 @@ html(lang='ru')
 
 		link(rel='stylesheet' href=`${FONT_URL}`)
 
-		each CSS in ['power', 'header']
+		each CSS in ['power', 'quiz']
 			link(rel='stylesheet' href=`${PATHS.css}/${CSS}.min.css?v=${_V}`)
+
+		noscript
+			style .screen-loading .loading-text { display: none }
 
 	body
 
-		div.content.content__index
-
-			include inc/header.pug
+		div.content.content__quiz
 
 			main.main
 
-				iframe(src='./test-frame.html')
+				div.screen.screen-loading(data-current)
+					p.loading-text Загрузка теста...
 
-		each JS in ['vendors/kamina.min', 'index.min']
-			script(src=`${PATHS.js}/${JS}.js?v=${_V}` defer)
+					noscript
+						p В вашем браузере не включен JavaScript :(
+						p Включите его для прохождения теста, пожалуйсто!!!1
+
+				div.screen.screen-start
+					div.background
+
+					div.start
+						div.start__badge Тест
+
+						h2.start__title #{TITLE}
+
+						p.start__text #{DESCRIPTION}
+
+						p.start__btn.bottom-btn #[button(data-action='start-quiz') Начать]
+
+				div.screen.screen-quiz
+
+				div.screen.screen-final
+
+		//- Если кэшировать через <link rel='preload'>, то браузер ругается в консоль, что картинки не используются сразу
+		div.cache
+			each image in ['footballer', 'tyan', 'hand', 'ded', 'ded-suffering', 'panfilov']
+				img(src=`${PATHS.img}/screen_final/${image}.png?v=${_V}` alt='cached image')
+
+		include inc/question-template.pug
+
+		include inc/final-template.pug
+
+		each JS in ['vendors/kamina', 'vendors/ResizeSensor', 'vendors/ElementQueries', 'vendors/likely']
+			script(src=`${PATHS.js}/${JS}.min.js?v=${_V}` defer)
+
+		script(src=`${PATHS.js}/engine.min.js?v=${_V}` type='module' defer)
