@@ -96,16 +96,16 @@ export const U = {
 
 	clearNode(_node, exceptions = []) {
 		if (_node.hasChildNodes()) {
-			_node.childNodes.forEach(node_ => {
+			Array.from(_node.childNodes).forEach(node_ => {
 				let trigger = false
 
 				exceptions.forEach(exception => {
-					if (Array.from(node_.classList).includes(exception)) {
+					if (node_.classList.contains(exception)) {
 						trigger = true
 					}
 				})
 
-				if (!trigger) { node_.remove() }
+				if (!trigger) { _node.removeChild(node_) }
 			})
 		}
 	},

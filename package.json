@@ -2,7 +2,7 @@
 	"name": "cmtt-test",
 	"description": "Тестовое задание для вакансии frontend-разработчика спецпроектов в «Комитете»",
 	"private": true,
-	"version": "0.0.9a",
+	"version": "0.0.9b",
 	"author": "Dmitry <dmitry@cojam.ru> (https://e965.ru)",
 	"repository": "github:tehcojam/cmtt-test",
 	"license": "MIT",

@@ -109,11 +109,11 @@ export class QuizRenderer {
 
 		let ourResult = Object.entries(this.results)[scoreKey]
 
-		let finalScreenBackground = $create.elem('div', '', 'background')
+		let finalScreenTemplate = document.importNode($make.qs('#final').content, true)
+
+		let finalScreenBackground = $make.qsf('.background', finalScreenTemplate)
 
 		finalScreenBackground.dataset.scoreKey = ourResult[0]
-
-		let finalScreenTemplate = document.importNode($make.qs('#final').content, true)
 
 		let finalScreenNode = $make.qsf('.final', finalScreenTemplate)
 
