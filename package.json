@@ -1,38 +1,40 @@
 {
-	"name": "cmtt-test",
+	"name": "cmtt-test-quiz",
 	"description": "Тестовое задание для вакансии frontend-разработчика спецпроектов в «Комитете»",
 	"private": true,
-	"version": "0.0.9b",
+	"version": "0.0.11",
 	"author": "Dmitry <dmitry@cojam.ru> (https://e965.ru)",
-	"repository": "github:tehcojam/cmtt-test",
+	"repository": "github:e965/cmtt-test",
 	"license": "MIT",
 	"engines": {
-		"node": ">= 12.2.0",
-		"npm": ">= 6.9.0"
+		"node": ">= 14.14.0",
+		"npm": ">= 6.14.8"
 	},
 	"scripts": {
 		"build": "gulp build",
 		"dev": "gulp dev",
-		"dist": "gulp"
+		"dist": "gulp",
+		"predeploy": "npm run dist",
+        "deploy": "gh-pages -d dist"
 	},
 	"dependencies": {
 		"cmtt-likely": "1.2.2",
-		"css-element-queries": "1.2.0",
-		"kamina-js": "1.3.1"
+		"css-element-queries": "1.2.3",
+		"kamina-js": "1.3.2"
 	},
 	"devDependencies": {
-		"browser-sync": "2.26.5",
+		"browser-sync": "2.26.13",
+		"gh-pages": "^3.1.0",
 		"gulp": "4.0.2",
-		"gulp-bom": "2.0.0",
+		"gulp-bom": "3.0.0",
 		"gulp-clean": "0.4.0",
-		"gulp-clean-css": "4.2.0",
+		"gulp-clean-css": "4.3.0",
 		"gulp-pipe": "1.0.4",
 		"gulp-plumber": "1.2.1",
 		"gulp-pug": "4.0.1",
-		"gulp-rename": "1.4.0",
+		"gulp-rename": "2.0.0",
 		"gulp-stylus": "2.7.0",
-		"gulp-uglify": "3.0.2",
-		"gulp-watch": "5.0.1",
-		"terser": "4.0.0"
+		"gulp-terser": "1.4.1",
+		"gulp-watch": "5.0.1"
 	}
 }

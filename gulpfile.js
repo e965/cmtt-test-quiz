@@ -30,12 +30,7 @@ let stylus = {
 	compile: require('gulp-stylus')
 }
 
-let uglify = {
-	core:      require('terser'),
-	composer:  require('gulp-uglify/composer')
-}
-
-let minifyJS = uglify.composer(uglify.core, console)
+const terser = require('gulp-terser')
 
 let reloadServer = () => liveServer.stream()
 
@@ -77,7 +72,7 @@ let paths = {
 
 gulp.task('liveReload', () => liveServer({
 	server: [dirs.build, dirs.dist_static],
-	port: 8079,
+	port: 8080,
 	notify: false
 }))
 
@@ -112,7 +107,7 @@ gulp.task('pug:dev', () => tube(
 
 let jsTubes = (dest = paths.js.prod) => [
 	plumber(),
-	minifyJS({}),
+	terser({}),
 	rename({ suffix: '.min' }),
 	bom(),
 	gulp.dest(dest)
@@ -130,7 +125,7 @@ gulp.task('js:assets:dev', () => tube(
 
 gulp.task('js:get-vendors', () => tube([
 	gulp.src(Object.values(paths.js.vendors)),
-	minifyJS({}),
+	terser({}),
 	rename(path => {
 		if (!path.basename.endsWith('.min')) {
 			path.extname = '.min' + path.extname
